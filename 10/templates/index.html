@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Todo List</h1>
+            <p>Простейший REST API на FastAPI</p>
+        </div>
+
+        <div class="content">
+            <div class="form">
+                <input type="text" id="taskInput" placeholder="Новая задача...">
+                <button class="btn" onclick="addTask()">Добавить</button>
+            </div>
+
+            <div id="tasksList">
+                <p>Загрузка задач...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
