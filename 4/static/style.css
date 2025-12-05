@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2c3e50;
+    padding: 20px;
+}
+
+body, h1, h2, h3, p, span, li, td, th, label, a, button {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    color: white;
+}
+
+code {
+    font-family: "Courier New", monospace;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #34495e;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.api-info, .form-group {
+    background: #2c3e50;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.btn, button, input[type="submit"] {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    color: white;
+}
+
+.btn-primary, input[type="submit"],
+.btn-secondary,
+.btn-edit,
+.btn-delete{
+    background: grey;
+    padding: 4px 8px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.data-table th {
+    background-color: #2c3e50;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #3d566e;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 30px;
+    color: #95a5a6;
+}
+
+.user-form {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #3d566e;
+    border-radius: 3px;
+    background: #2c3e50;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+}
+
+code {
+    background: #1a252f;
+    padding: 8px;
+    border-radius: 3px;
+    display: block;
+    margin: 10px 0;
+    overflow-x: auto;
+    color: white;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление пользователями</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Управление пользователями</h1>
+        </header>
+
+        <div class="actions">
+            <a href="{{ url_for('add_user_form') }}" class="btn btn-primary">Добавить пользователя</a>
+            <a href="{{ url_for('get_users') }}" class="btn btn-secondary">Просмотреть API (JSON)</a>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Дата</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if users %}
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.date }}</td>
+                        <td class="actions-cell">
+                            <a href="{{ url_for('edit_user_form', user_id=user.id) }}" class="btn btn-edit">Редактировать</a>
+                            <button onclick="deleteUser({{ user.id }})" class="btn btn-delete">Удалить</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="empty-message">
+                            Нет пользователей. Добавьте первого!
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div class="api-info">
+            <h3>REST API Endpoints:</h3>
+            <ul>
+                <li><code>GET /api/users</code> - получить всех пользователей</li>
+                <li><code>GET /api/users/{id}</code> - получить пользователя по ID</li>
+                <li><code>POST /api/users</code> - создать нового пользователя</li>
+                <li><code>PUT /api/users/{id}</code> - обновить пользователя</li>
+                <li><code>DELETE /api/users/{id}</code> - удалить пользователя</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function deleteUser(userId) {
+            if (confirm('Вы уверены, что хотите удалить пользователя?')) {
+                try {
+                    const response = await fetch(`/api/users/${userId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Ошибка при удалении пользователя');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Ошибка при удалении пользователя');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
