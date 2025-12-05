@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI: Принимаем параметры</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-rocket"></i> FastAPI Demo</h1>
+            <p class="subtitle">Приложение, которое принимает параметры и отвечает</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2><i class="fas fa-user-circle"></i> Форма приветствия</h2>
+                <form id="greet-form" method="POST" action="/greet">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-signature"></i> Введите ваше имя:</label>
+                        <input type="text" id="name" name="name"
+                               value="{{ input_value or '' }}"
+                               placeholder="Например: Иван" required>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Отправить (POST)
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="sendGetRequest()">
+                            <i class="fas fa-download"></i> Запросить (GET)
+                        </button>
+                        <button type="button" class="btn btn-info" onclick="testAPI()">
+                            <i class="fas fa-code"></i> Тест API
+                        </button>
+                    </div>
+                </form>
+
+                {% if message %}
+                <div class="message success">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Ответ сервера:</strong> {{ message }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-plug"></i> Примеры API запросов</h2>
+
+                <div class="api-examples">
+                    <div class="api-example">
+                        <h3><i class="fas fa-calculator"></i> Калькулятор</h3>
+                        <div class="input-group">
+                            <input type="number" id="num1" placeholder="Число 1" value="10">
+                            <select id="operation">
+                                <option value="add">+ Сложение</option>
+                                <option value="subtract">- Вычитание</option>
+                                <option value="multiply">× Умножение</option>
+                                <option value="divide">÷ Деление</option>
+                            </select>
+                            <input type="number" id="num2" placeholder="Число 2" value="5">
+                            <button class="btn btn-small" onclick="calculate()">
+                                <i class="fas fa-equals"></i> Вычислить
+                            </button>
+                        </div>
+                        <div id="calc-result" class="result"></div>
+                    </div>
+
+                    <div class="api-example">
+                        <h3><i class="fas fa-users"></i> Получить пользователя</h3>
+                        <div class="input-group">
+                            <input type="number" id="user-id" placeholder="ID пользователя" value="1" min="1" max="3">
+                            <label class="checkbox">
+                                <input type="checkbox" id="user-details">
+                                Подробности
+                            </label>
+                            <button class="btn btn-small" onclick="getUser()">
+                                <i class="fas fa-search"></i> Найти
+                            </button>
+                        </div>
+                        <div id="user-result" class="result"></div>
+                    </div>
+
+                    <div class="api-example">
+                        <h3><i class="fas fa-comment-dots"></i> Быстрое приветствие</h3>
+                        <div class="input-group">
+                            <input type="text" id="quick-name" placeholder="Ваше имя" value="Анна">
+                            <button class="btn btn-small" onclick="quickGreet()">
+                                <i class="fas fa-bolt"></i> Быстрый запрос
+                            </button>
+                        </div>
+                        <div id="quick-result" class="result"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>FastAPI Demo • Принимаем параметры и отвечаем</p>
+            <p class="small">
+                <i class="fas fa-link"></i>
+                <a href="/docs" target="_blank">Документация API (Swagger)</a> •
+                <a href="/redoc" target="_blank">ReDoc документация</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
