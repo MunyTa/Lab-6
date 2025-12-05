@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List с SQLite</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <i class="fas fa-tasks"></i>
+                Todo List
+                <i class="fas fa-database"></i>
+            </h1>
+            <div class="tag">
+                <i class="fas fa-database"></i> SQLite + Flask + Pydantic
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="stats-bar" id="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-tasks">0</div>
+                    <div class="stat-label">Всего задач</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="active-tasks">0</div>
+                    <div class="stat-label">Активных</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="completed-tasks">0</div>
+                    <div class="stat-label">Выполнено</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="completion-rate">0%</div>
+                    <div class="stat-label">Прогресс</div>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="🔍 Поиск задач..."
+                       onkeypress="if(event.key === 'Enter') searchTasks()">
+                <button class="btn btn-secondary" onclick="searchTasks()">
+                    <i class="fas fa-search"></i> Поиск
+                </button>
+                <button class="btn" onclick="clearSearch()">
+                    <i class="fas fa-times"></i> Сброс
+                </button>
+            </div>
+
+            <div class="form-container">
+                <h3><i class="fas fa-plus-circle"></i> Новая задача</h3>
+                <div class="input-group">
+                    <input type="text" id="taskTitle" placeholder="Название задачи *" maxlength="100">
+                    <div class="char-counter">
+                        <span id="title-chars">0</span>/100
+                    </div>
+                    <div class="validation-error" id="title-error"></div>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="taskDescription" placeholder="Описание (необязательно)" maxlength="500">
+                    <div class="char-counter">
+                        <span id="desc-chars">0</span>/500
+                    </div>
+                    <div class="validation-error" id="desc-error"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="addTask()">
+                        <i class="fas fa-plus"></i> Добавить задачу
+                    </button>
+
+                    <button class="btn btn-danger" onclick="clearAllTasks()">
+                        <i class="fas fa-trash"></i> Удалить все
+                    </button>
+                </div>
+            </div>
+
+            <div id="tasks-container">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i><br>
+                    Загрузка задач из базы данных...
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Todo List с SQLite • Данные сохраняются в базе</p>
+            <p><small>Используется SQLite + Flask + Pydantic • <span id="db-info">База данных загружается...</span></small></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
